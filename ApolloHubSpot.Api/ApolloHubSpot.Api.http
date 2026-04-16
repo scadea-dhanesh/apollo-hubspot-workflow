@@ -1,0 +1,142 @@
+@ApolloHubSpot.Api_HostAddress = http://localhost:5129
+
+GET {{ApolloHubSpot.Api_HostAddress}}/health
+Accept: application/json
+
+###
+
+# Natural-language ICP → Groq → apollo_filters → same sync as POST /api/sync (set GROQ_API_KEY or Groq:ApiKey)
+POST {{ApolloHubSpot.Api_HostAddress}}/api/sync/from-prompt
+Content-Type: application/json
+
+{
+  "prompt": "HR leaders at health care companies in India and the United States, 200+ employees",
+  "max_pages": 1,
+  "include_assistant_raw": true
+}
+
+###
+
+# Recruiters in India, employer headcount ~50–100 (Apollo range is min,max as one string)
+# Paid Apollo bulk_match: all default false when you send JSON — set true only when you want to spend credits.
+POST {{ApolloHubSpot.Api_HostAddress}}/api/sync
+Content-Type: application/json
+
+{
+  "max_pages": 1,
+  "reveal_personal_email": true,
+  "apollo_filters": {
+    "per_page": 50,
+    "person_locations": ["India"],
+    "organization_num_employees_ranges": ["50,100"],
+    "person_titles": [
+      "recruiter",
+      "talent acquisition",
+      "recruiting manager",
+      "senior recruiter",
+      "technical recruiter"
+    ]
+  }
+}
+
+###
+
+# Collab outreach — ayurvedic / women’s wellness / beauty (Apollo is B2B: override default person_titles; “influencer” titles often return 0 rows — use founder/marketing + light q_keywords)
+POST {{ApolloHubSpot.Api_HostAddress}}/api/sync
+Content-Type: application/json
+
+{
+  "max_pages": 1,
+  "apollo_filters": {
+    "per_page": 50,
+    "person_locations": ["India"],
+    "person_titles": [
+      "founder",
+      "co-founder",
+      "marketing manager",
+      "brand manager"
+    ],
+    "q_keywords": "beauty",
+    "include_similar_titles": false
+  }
+}
+
+###
+
+# Cold email — digital marketing agencies (ayurvedic / consumer brand outreach; override person_titles)
+POST {{ApolloHubSpot.Api_HostAddress}}/api/sync
+Content-Type: application/json
+
+{
+  "max_pages": 1,
+  "apollo_filters": {
+    "per_page": 50,
+    "person_locations": ["India"],
+    "organization_industries": [
+      "marketing & advertising",
+      "public relations",
+      "online media"
+    ],
+    "person_titles": [
+      "founder",
+      "co-founder",
+      "chief executive officer",
+      "managing director",
+      "partner",
+      "business development",
+      "account director",
+      "creative director",
+      "head of growth"
+    ],
+    "q_keywords": "digital marketing agency"
+  }
+}
+
+###
+
+POST {{ApolloHubSpot.Api_HostAddress}}/api/sync
+Content-Type: application/json
+
+{
+  "max_pages": 2,
+  "apollo_filters": {
+    "per_page": 100,
+    "organization_industries": [
+      "hospital & health care",
+      "medical practice",
+      "health, wellness & fitness",
+      "medical devices"
+    ],
+    "person_titles": [
+      "head of recruitment",
+      "head of talent",
+      "talent acquisition",
+      "recruitment manager",
+      "recruiting manager",
+      "director of recruitment",
+      "director talent acquisition",
+      "vp recruitment",
+      "vp talent acquisition",
+      "chief people officer",
+      "head of human resources",
+      "head hr"
+    ]
+  }
+}
+
+###
+
+POST {{ApolloHubSpot.Api_HostAddress}}/api/sync
+Content-Type: application/json
+
+{
+  "max_pages": 1,
+  "icp_filters": {
+    "apollo_filters": {
+      "person_titles": ["engineering manager"],
+      "person_locations": ["India"]
+    }
+  }
+}
+
+###

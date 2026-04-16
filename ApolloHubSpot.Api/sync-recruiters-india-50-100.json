@@ -1,0 +1,15 @@
+{
+  "max_pages": 1,
+  "apollo_filters": {
+    "per_page": 50,
+    "person_locations": ["India"],
+    "organization_num_employees_ranges": ["50,100"],
+    "person_titles": [
+      "recruiter",
+      "talent acquisition",
+      "recruiting manager",
+      "senior recruiter",
+      "technical recruiter"
+    ]
+  }
+}

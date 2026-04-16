@@ -1,0 +1,16 @@
+bin/
+obj/
+
+# Configuration files that may contain API keys or secrets
+appsettings.json
+appsettings.Local.json
+appsettings.*.Local.json
+secrets.json
+*.secrets.json
+
+# Environment files
+.env
+.env.*
+
+# User-specific project settings
+*.csproj.user
