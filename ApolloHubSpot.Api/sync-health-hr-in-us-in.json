@@ -1,0 +1,25 @@
+{
+  "max_pages": 10,
+  "apollo_filters": {
+    "per_page": 100,
+    "person_locations": ["India", "United States"],
+    "organization_industries": [
+      "hospital & health care",
+      "medical practice",
+      "health, wellness & fitness"
+    ],
+    "person_titles": [
+      "human resources director",
+      "hr director",
+      "director of human resources",
+      "head of talent acquisition",
+      "talent acquisition manager",
+      "recruitment manager",
+      "recruiting manager",
+      "head of recruitment",
+      "vp human resources",
+      "vp talent acquisition"
+    ],
+    "include_similar_titles": true
+  }
+}
